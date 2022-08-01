@@ -9,10 +9,10 @@ import cookieParser from "cookie-parser";
 import ConnectDB from "./database/connection.js";
 import bodyparser from 'body-parser'
 //route
-import authRoute from "./Routes/auth.js";
-import roomRoute from "./Routes/rooms.js";
-import userRoute from "./Routes/user.js";
-import bookingRoute from "./Routes/booking.js";
+import authRoute from "./routes/auth.js";
+import roomRoute from "./routes/rooms.js";
+import userRoute from "./routes/user.js";
+import bookingRoute from "./routes/booking.js";
 
 const bha_bha = express();
 

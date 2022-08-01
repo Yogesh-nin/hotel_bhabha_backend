@@ -1,4 +1,4 @@
-import User from "../Database/user.js";
+import User from "../database/user.js";
 import { createError } from "../utils/createError.js";
 
 export const updateUser = async (req, res, next) => {
