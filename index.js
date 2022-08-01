@@ -44,6 +44,8 @@ bha_bha.get("/", (req, res) => {
   res.send("Welcome to my hotel-bhabha backend software");
 });
 
-bha_bha.listen(4000, () => {
+const PORT = process.env.PORT || 4000
+
+bha_bha.listen(PORT, () => {
   ConnectDB(); //connect to database
 });
