@@ -41,7 +41,7 @@ bha_bha.use((err, req, res, next) => {
 });
 
 bha_bha.get("/", (req, res) => {
-  return res.json({ Welcome: `to my hotel-bhabha backend software` });
+  res.send("Welcome to my hotel-bhabha backend software");
 });
 
 bha_bha.listen(4000, () => {
