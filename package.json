@@ -33,6 +33,7 @@
     "helmet": "^5.1.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.4.4",
+    "nodemailer": "^6.7.8",
     "nodemon": "^2.0.19"
   },
   "type": "module"

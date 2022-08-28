@@ -13,6 +13,7 @@ import authRoute from "./routes/auth.js";
 import roomRoute from "./routes/rooms.js";
 import userRoute from "./routes/user.js";
 import bookingRoute from "./routes/booking.js";
+import contactRoutes from "./routes/contact.js";
 
 const bha_bha = express();
 
@@ -28,6 +29,7 @@ bha_bha.use("/api/auth", authRoute);
 bha_bha.use("/api/user", userRoute);
 bha_bha.use("/api/room", roomRoute);
 bha_bha.use("/api/booking", bookingRoute);
+bha_bha.use("/api/contact", contactRoutes);
 
 bha_bha.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
