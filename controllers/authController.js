@@ -48,3 +48,21 @@ export const login = async (req, res, next) => {
     next(error);
   }
 };
+
+export const loginnew = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ username: req.body.username });
+    if (!user) return createError(404, "User not found");
+
+    const isPasswordCorrect = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
+    if (!isPasswordCorrect) return createError(401, "Password is incorrect");
+
+    const { password, isAdmin, ...otherDetails } = user._doc;
+    res.status(200).json({ details: { ...otherDetails }, isAdmin });
+  } catch (error) {
+    next(error);
+  }
+};

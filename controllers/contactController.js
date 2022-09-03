@@ -33,7 +33,7 @@ export const sendEmail = (req, res) =>{
   
     const mail = {
       from: name,
-      to: "002chandra.yogesh@gmail.com",// receiver email,
+      to: "info@hotelbhabha.com",// receiver email,
       subject: subject,
       html:`
       <p>Name: ${name}</p>
