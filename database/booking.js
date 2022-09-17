@@ -16,6 +16,12 @@ const BookingSchema = new mongoose.Schema(
       phone: {
         type: String,
       },
+      gstNo: {
+        type: String,
+      },
+      companyName: {
+        type: String,
+      },
     },
     cart: [{
       roomid: {
