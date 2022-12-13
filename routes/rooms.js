@@ -8,6 +8,8 @@ import {
   updateRoomAvailability,
 } from "../controllers/roomController.js";
 
+// import { upload } from "../middleware/upload";
+
 import { verifyAdmin } from "../utils/verifyToken.js";
 
 const Router = express.Router();
