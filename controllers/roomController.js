@@ -3,9 +3,9 @@ import { v2 as cloudinary } from "cloudinary";
 // import file from "@babel/core/lib/transformation/file/file.js";
 
 cloudinary.config({
-  cloud_name: "dvo8pmkwp",
-  api_key: "678266168414687",
-  api_secret: "Sa4qQqNQwDZVmMimgvHyLMApf48",
+  cloud_name: "dsltctjo4",
+  api_key: "574111384325485",
+  api_secret: "zsFjegjQG2UhDHwqbbbbmgDDsXg",
   secure: true,
 });
 
@@ -34,16 +34,29 @@ export const createRoom = async (req, res, next) => {
 };
 
 export const updateRoom = async (req, res, next) => {
-  try {
-    const updatedRoom = await Room.findByIdAndUpdate(
-      req.params.id,
-      { $set: req.body },
-      { new: true }
-    );
-    res.status(200).json(updatedRoom);
-  } catch (error) {
-    next(error);
-  }
+  const file = req.files.photo;
+  cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
+    console.log(result);
+
+    try {
+      const updatedRoom = Room.findByIdAndUpdate(
+        req.params.id,
+        {
+          $set: {
+            name: req.body.name,
+            pricePerNight: req.body.pricePerNight,
+            guestCapacity: req.body.guestCapacity,
+            desc: req.body.desc,
+            image: result.url,
+          },
+        },
+        { new: true }
+      );
+      res.status(200).json(updatedRoom);
+    } catch (error) {
+      next(error);
+    }
+  });
 };
 
 export const updateRoomAvailability = async (req, res, next) => {
