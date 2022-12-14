@@ -3,9 +3,9 @@ import { v2 as cloudinary } from "cloudinary";
 // import file from "@babel/core/lib/transformation/file/file.js";
 
 cloudinary.config({
-  cloud_name: "dvo8pmkwp",
-  api_key: "678266168414687",
-  api_secret: "Sa4qQqNQwDZVmMimgvHyLMApf48",
+  cloud_name: "dsltctjo4",
+  api_key: "574111384325485",
+  api_secret: "zsFjegjQG2UhDHwqbbbbmgDDsXg",
   secure: true,
 });
 
