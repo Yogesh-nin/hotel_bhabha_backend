@@ -30,6 +30,7 @@ export const createRoom = async (req, res, next) => {
       next(error);
     }
   });
+
 };
 
 export const updateRoom = async (req, res, next) => {
