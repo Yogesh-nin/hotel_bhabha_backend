@@ -1,27 +1,61 @@
 import Room from "../database/room.js";
+import { v2 as cloudinary } from "cloudinary";
+// import file from "@babel/core/lib/transformation/file/file.js";
+
+cloudinary.config({
+  cloud_name: "dsltctjo4",
+  api_key: "574111384325485",
+  api_secret: "zsFjegjQG2UhDHwqbbbbmgDDsXg",
+  secure: true,
+});
 
 export const createRoom = async (req, res, next) => {
-  const newRoom = new Room(req.body);
+  console.log(req.body);
+  const file = req.files.photo;
+  cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
+    console.log(result);
 
-  try {
-    const savedRoom = await newRoom.save();
-    res.status(201).json(savedRoom);
-  } catch (error) {
-    next(error);
-  }
+    const newRoom = new Room({
+      name: req.body.name,
+      pricePerNight: req.body.pricePerNight,
+      guestCapacity: req.body.guestCapacity,
+      desc: req.body.desc,
+      image: result.url,
+    });
+
+    try {
+      const savedRoom = newRoom.save();
+      res.status(201).json(savedRoom);
+    } catch (error) {
+      next(error);
+    }
+  });
 };
 
 export const updateRoom = async (req, res, next) => {
-  try {
-    const updatedRoom = await Room.findByIdAndUpdate(
-      req.params.id,
-      { $set: req.body },
-      { new: true }
-    );
-    res.status(200).json(updatedRoom);
-  } catch (error) {
-    next(error);
-  }
+  const file = req.files.photo;
+  cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
+    console.log(result);
+
+    try {
+      const updatedRoom = Room.findByIdAndUpdate(
+        req.params.id,
+        {
+          $set: {
+            name: req.body.name,
+            pricePerNight: req.body.pricePerNight,
+            guestCapacity: req.body.guestCapacity,
+            desc: req.body.desc,
+            image: result.url,
+          },
+        },
+        { new: true }
+      );
+      res.status(200).json(updatedRoom);
+    } catch (error) {
+      next(error);
+    }
+  });
 };
 
 export const updateRoomAvailability = async (req, res, next) => {
