@@ -10,7 +10,6 @@ cloudinary.config({
 });
 
 export const createRoom = async (req, res, next) => {
-  console.log(req.body);
   const file = req.files.photo;
   cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
     console.log(result);
@@ -34,12 +33,12 @@ export const createRoom = async (req, res, next) => {
 };
 
 export const updateRoom = async (req, res, next) => {
-  const file = req.files.photo;
-  cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
-    console.log(result);
-
+  if(req.files){
+    const file = req.files.photo;
+    console.log(file)
     try {
-      const updatedRoom = Room.findByIdAndUpdate(
+      const result = await cloudinary.uploader.upload(file.tempFilePath);
+      const updatedRoom = await Room.findByIdAndUpdate(
         req.params.id,
         {
           $set: {
@@ -53,10 +52,34 @@ export const updateRoom = async (req, res, next) => {
         { new: true }
       );
       res.status(200).json(updatedRoom);
+      
     } catch (error) {
       next(error);
     }
-  });
+
+    
+  } else{
+    try {
+      const updatedRoom = await Room.findByIdAndUpdate(
+        req.params.id,
+        {
+          $set: {
+            name: req.body.name,
+            pricePerNight: req.body.pricePerNight,
+            guestCapacity: req.body.guestCapacity,
+            desc: req.body.desc,
+            photo: req.body.photo
+          },
+        },
+        { new: true }
+      );
+      res.status(200).json(updatedRoom);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  
 };
 
 export const updateRoomAvailability = async (req, res, next) => {

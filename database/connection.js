@@ -10,6 +10,6 @@ export default async () => {
       console.log("Connected to MongoDB");
     })
     .catch((err) => {
-      console.log("Error connecting to MongoDB: ", err.message); 
+      console.log("Error connecting to MongoDB: ", err.message);
     });
 };

@@ -24,6 +24,6 @@ Router.delete("/:id", deleteBooking);
 Router.get("/:id", verifyAdmin, getBooking);
 //GET ALL
 
-Router.get("/", verifyAdmin, getBookings);
+Router.get("/", getBookings);
 
 export default Router;
