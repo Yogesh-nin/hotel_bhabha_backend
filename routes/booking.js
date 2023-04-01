@@ -18,12 +18,12 @@ Router.post("/cart", createCartData);
 Router.post("/guest", createGuestDetails);
 Router.post("/date",setDate)
 //DELETE
-Router.delete("/:id", deleteBooking);
+Router.delete("/:id", verifyAdmin, deleteBooking);
 //GET
 
 Router.get("/:id", verifyAdmin, getBooking);
 //GET ALL
 
-Router.get("/", getBookings);
+Router.get("/", verifyAdmin, getBookings);
 
 export default Router;
